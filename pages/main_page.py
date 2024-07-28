@@ -1,15 +1,14 @@
 from .base_page import BasePage
-# from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-# import pytest
-# import time
+from .locators import MainPageLocator
+from .login_page import LoginPage
 
 class MainPage(BasePage):
-    def go_to_login_page(self):
-        login_link = self.browser.find_element(By.CSS_SELECTOR, "#login_link")
+    def go_to_login_page(self):        
+        login_link = self.browser.find_element(*MainPageLocator.LOGIN_LOCATOR)
         login_link.click() 
+        return LoginPage(browser=self.browser, url=self.browser.current_url)
         
     def should_be_login_link(self):
-        assert self.is_element_present(By.CSS_SELECTOR, "#login_link"), "Not found element."
-        # self.browser.find_element(By.CSS_SELECTOR, "#login_link_invalid")
+        assert self.is_element_present(*MainPageLocator.LOGIN_LOCATOR), "Not found login link."
+
