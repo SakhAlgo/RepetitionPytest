@@ -12,6 +12,7 @@ class ProductPage(BasePage):
     def guest_can_add_product_to_basket(self):
         btn_basket = self.browser.find_element(*ProductPageLocator.BASKET_BUTTON)
         btn_basket.click()
+        # time.sleep(3)
         self.solve_quiz_and_get_code()
     
     def should_be_product_in_the_basket(self):
@@ -30,3 +31,4 @@ class ProductPage(BasePage):
     def message_disappeared_after_adding_product_to_basket(self):
         self.guest_can_add_product_to_basket()
         assert self.is_disappeared(*ProductPageLocator.MESSAGE_AFTER_ADDING_PRODUCT), 'Messge is not disappeared Test3'
+        

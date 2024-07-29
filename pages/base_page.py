@@ -2,7 +2,7 @@ from selenium.common.exceptions import NoSuchElementException, NoAlertPresentExc
 import math, time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .locators import BasePageLocators
+from .locators import BasePageLocators, BasketPageLocator
 
 
 class BasePage:
@@ -11,9 +11,18 @@ class BasePage:
         self.url = url
         self.browser.implicitly_wait(timeout)
         
+    def should_be_basket_is_empty(self):
+        elem_in =  self.is_element_present(*BasketPageLocator.BASKET_EMPTY)
+        elem_out = self.is_not_element_present(*BasketPageLocator.BASKET_FULL)
+        assert elem_in and elem_out, 'Basket is not empty'
+        
+    def go_to_basket_page(self):
+        element = self.browser.find_element(*BasePageLocators.BASKET_LOCATOR)
+        element.click()
+                
     def go_to_login_page(self):
-        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
-        link.click()
+        element = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
+        element.click()
 
     def should_be_login_link(self):
         assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
@@ -33,7 +42,6 @@ class BasePage:
             WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return True
-
         return False
 
     # Если же мы хотим проверить, что какой-то элемент исчезает
@@ -63,3 +71,7 @@ class BasePage:
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented," \
+                                                                    " probably unauthorised user"
