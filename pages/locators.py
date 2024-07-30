@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 class MainPageLocator():
     LOGIN_LOCATOR = (By.CSS_SELECTOR, '#login_link')
+    CATALOG_LOCATOR = (By.CSS_SELECTOR, '.dropdown > ul:nth-child(2) > li:nth-child(1) > a:nth-child(1)')
 
 class BasketPageLocator():
     BASKET_EMPTY = (By.CSS_SELECTOR, "#content_inner > p") 
@@ -27,3 +28,5 @@ class ProductPageLocator():
     PRODUCT_NAME = (By.CSS_SELECTOR, '.product_main > h1')
     PRODUCT_NAME_IN_THE_MESSAGE = (By.CSS_SELECTOR, 'div.alertinner > strong')
     MESSAGE_AFTER_ADDING_PRODUCT = (By.CSS_SELECTOR, 'div.alertinner ')
+    FIRST_PRODUCT = (By.CSS_SELECTOR, 'img.thumbnail')
+    

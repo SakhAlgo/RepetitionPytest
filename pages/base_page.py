@@ -44,7 +44,6 @@ class BasePage:
             return True
         return False
 
-    # Если же мы хотим проверить, что какой-то элемент исчезает
     def is_disappeared(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException).\
@@ -58,15 +57,12 @@ class BasePage:
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))
-        # print(answer)
         time.sleep(2)
         alert.send_keys(answer)
-        # time.sleep(10)
         alert.accept()
         try:
             alert = self.browser.switch_to.alert
             alert_text = alert.text
-            # time.sleep(1)
             print(f"Your code: {alert_text}")
             alert.accept()
         except NoAlertPresentException:
