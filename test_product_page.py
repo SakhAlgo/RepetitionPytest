@@ -10,14 +10,14 @@ product_link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_2
 product_link_without_promo = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 
 @pytest.mark.skip
-@pytest.mark.need_review
-def test_guest_can_add_product_to_basket(self, browser, product_link_without_promo):
+# @pytest.mark.need_review
+def test_guest_can_add_product_to_basket(browser, product_link_without_promo):
     product_page = ProductPage(browser, product_link_without_promo)
     product_page.open()
     product_page.guest_can_add_product_to_basket()
     product_page.should_be_product_in_the_basket()
 
-@pytest.mark.skip
+# @pytest.mark.skip
 @pytest.mark.need_review
 def test_should_be_promo_product_page(browser):
     product_page = ProductPage(browser, product_link)
@@ -32,7 +32,7 @@ def test_message_disappeared_after_adding_product_to_basket(browser):
     product_page.open()
     product_page.message_disappeared_after_adding_product_to_basket()
 
-@pytest.mark.skip
+# @pytest.mark.skip
 @pytest.mark.need_review
 def test_guest_can_see_product_in_basket_opened_from_product_page(browser):
     page = ProductPage(browser, product_link)
@@ -56,7 +56,7 @@ class TestUserAddToBasketFromProductPage():
         return product_page
 
     # @pytest.mark.skip    
-    # @pytest.mark.need_review
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         product_page = self.register_new_user_and_came_back(browser)
         
